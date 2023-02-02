@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,12 @@
         img {
             height: 200px;
         }
+
         body {
             margin: 0;
             touch-action: none;
         }
+
         #sidewalk {
             background-color: gray;
             height: 50px;
@@ -20,6 +23,7 @@
         }
     </style>
 </head>
+
 <body>
     <img src="./mario.gif" alt="" id="avatar">
     <div id="sidewalk"></div>
@@ -28,18 +32,22 @@
         let originX = null;
         let offSetX = 0;
 
-        function onDragStart(event){
+        //the function will recieve the event object once the 
+        //querySelector is triggered 
+        function onDragStart(event) {
+            event.preventDefault();
+            //here we save the value of the x position of mario
             originX = event.clientX;
             dragStart = true;
+            
             event.currentTarget.setPointerCapture(event.pointerId)
         }
-        function onDragEnd(event){
+        function onDragEnd(event) {
             dragStart = false
             offSetX += event.clientX - originX
-
         }
-        function onDragMove(event){
-            if(!dragStart){
+        function onDragMove(event) {
+            if (!dragStart) {
                 return;
             }
 
@@ -53,10 +61,19 @@
             event.currentTarget.style.transform = `translateX(${translateX}px)`
         }
 
+
+        //here we add references tothe eventLisenters 
+        //and give them refference fx. onDragStart 
+        //then we make functions above or we can make them 
+        //anywhere with the same refference name. 
+        //Once the event lisetener is triggerd, the function 
+        //will be called 
         const mario = document.querySelector("#avatar")
         mario.addEventListener('pointerdown', onDragStart)
         mario.addEventListener('pointerup', onDragEnd)
+        //this is when we press down and hold/move 
         mario.addEventListener('pointermove', onDragMove)
     </script>
 </body>
+
 </html>

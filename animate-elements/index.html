@@ -13,24 +13,33 @@
 
      <script>
         const decreaseCounter = () => {
+            //we convert the span string content to a number 
+            // we can also use parseInt
             const counter = Number(countElement.textContent);
 
             if(counter > 1){
+                // degrese by one if its higher then 1
                 countElement.textContent = counter - 1;
             }else{
+                // clearInterval stops the interval
+                // we just have to pas the id of the interval
+                //that we want to stop 
                 clearInterval(intervalId)
-
+                // we change the text content of the h1 tag 
                 const title = document.getElementById("title")
                 title.textContent = "BOOOOM!"
 
                 setTimeout(() => {
+                    //after 2 seconds we change the h1 text content again
                     title.textContent = "Everything's broken now!"
                 }, 2000);
+            
             }
 
         }
-
+        //we select the span (counter)
         const countElement = document.querySelector("#counter")
+        // here we create a interval 
         const intervalId = setInterval(decreaseCounter, 1000)
      </script>
 
